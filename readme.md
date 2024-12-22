@@ -31,7 +31,7 @@ SuperCart simplifies grocery shopping by providing an intuitive platform where u
 ## Installation  
 
 ### Prerequisites  
-- Node.js (>= 14.x)  
+- Node.js   
 - MongoDB (local or cloud)  
 
 ### Steps  
@@ -46,7 +46,7 @@ SuperCart simplifies grocery shopping by providing an intuitive platform where u
    npm install  
    ```  
 3. Set up the environment variables:  
-   - Create a `.env` file in the `backend` directory.  
+   - Create a `.env` file in the `server` directory.  
    - Add the following variables:  
      ```env  
      MONGO_URI=your-mongodb-uri  
