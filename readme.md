@@ -8,7 +8,7 @@ An online grocery app built with the MERN stack and Fastify, designed to deliver
 - [Installation](#installation)  
 - [Usage](#usage)  
 - [API Endpoints](#api-endpoints)    
-- [Contributing](#contributing)  
+ 
   
 
 ## About the Project  
@@ -75,11 +75,5 @@ SuperCart simplifies grocery shopping by providing an intuitive platform where u
 
 _(More endpoints will be added as features are implemented.)_   
 
-## Contributing  
-Contributions are welcome! Please follow these steps:  
-1. Fork the repository.  
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`).  
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).  
-4. Push to the branch (`git push origin feature/AmazingFeature`).  
-5. Open a pull request.  
+ 
 
