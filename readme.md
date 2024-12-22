@@ -58,7 +58,7 @@ SuperCart simplifies grocery shopping by providing an intuitive platform where u
    ```bash  
    npm start  
    ```  
-5. (Frontend instructions will follow upon completion of frontend development.)  
+5. (Frontend instructions will follow upon completion of backend development.)  
 
 ## Usage  
 - Backend runs on `http://localhost:4000` by default.  
