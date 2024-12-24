@@ -1,6 +1,6 @@
 import  Order from "../../models/order.js";
 import  Branch  from "../../models/branch.js";
-import  Customer, { DeliveryPartner }  from "../../models/user.js";
+import  {Customer,  DeliveryPartner }  from "../../models/user.js";
 
 export const createOrder = async(req,reply)=>{
     try{
@@ -8,7 +8,7 @@ export const createOrder = async(req,reply)=>{
         const {items,branch,totalPrice} = req.body;
 
         const customerData = await Customer.findById(userId);
-        const branchData = await Branch.find(branch);
+        const branchData = await Branch.findById(branch);
 
         if(!customerData){
             return reply.status(404).send({message: "Customer not found"});
@@ -29,8 +29,8 @@ export const createOrder = async(req,reply)=>{
                 address:customerData.address || "No address available"
             },
             pickupLocation:{
-                latitude:branchData.liveLocation.latitude,
-                longitude:branchData.liveLocation.longitude,
+                latitude:branchData.Location.latitude,
+                longitude:branchData.Location.longitude,
                 address:branchData.address || "No address available"
             },
         })
@@ -68,7 +68,9 @@ export const confirmOrder = async (req,reply) =>{
             latitude:deliveryPersonLocation?.latitude,
             longitude:deliveryPersonLocation?.longitude,
             address:deliveryPersonLocation.address || ""
-        }
+        };
+
+        req.server.io.to(orderId).emit("orderConfirmed",order);
 
         await order.save();
 
@@ -106,8 +108,58 @@ export const updateOrderStatus = async (req,reply) =>{
         
         order.deliveryPersonLocation= deliveryPersonLocation
         await order.save();
+
+        req.server.io.to(orderId).emit("LiverTrackingUpdates",order);
+
         return reply.send(order);
     }catch(error){
         return reply.status(500).send({message: "Failed to update order status", error});
+    }
+};
+
+export const getOrders = async(req,reply)=>{
+    try{
+        const {status,customerId,deliveryPartnerId,branchId}= req.query;
+        let query={}
+
+        if(status){
+            query.status=status;
+        }
+        if(customerId){
+            query.customer=customerId;
+        }
+        if(deliveryPartnerId){
+            query.deliveryPartner=deliveryPartnerId;
+            query.branch=branchId;
+        }
+
+        const orders= await Order.find(query).populate(
+            "customer branch items.item deliveryPartner"
+        )
+
+        return reply.send(orders);
+
+    } catch(error){
+        return replystatus(500).send({message:"Failed to retrieve order", error});
+    }
+};
+
+export const getOrderById = async(req,reply)=>{
+    try{
+        const {orderId}= req.params;
+        
+
+        const order= await Order.findById(order).populate(
+            "customer branch items.item deliveryPartner"
+        );
+
+        if(!order){
+            return reply.status(404).send({message: "Order not found"})
+        }
+
+        return reply.send(order);
+
+    } catch(error){
+        return replystatus(500).send({message:"Failed to retrieve order", error});
     }
 };
