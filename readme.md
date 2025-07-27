@@ -1,5 +1,5 @@
 # SuperCart 🛒  
-An online grocery app built with the MERN stack and Fastify, designed to deliver a seamless shopping experience for users.
+This is the Backend structure of an online grocery app, designed to deliver a seamless shopping experience for users.
 
 ## Table of Contents  
 - [About the Project](#about-the-project)  
@@ -21,12 +21,9 @@ SuperCart simplifies grocery shopping by providing an intuitive platform where u
 - Real-time inventory updates.  
 - Responsive and user-friendly design (frontend development in progress).  
 
-## Tech Stack  
-- **Frontend**: HTML, CSS, JavaScript, React, Bootstrap (to be implemented).  
+## Tech Stack    
 - **Backend**: Node.js, Fastify, Express.js.  
-- **Database**: MongoDB.  
-- **State Management**: Redux (to be integrated).  
-- **Deployment**: To be determined.  
+- **Database**: MongoDB.    
 
 ## Installation  
 
@@ -57,8 +54,7 @@ SuperCart simplifies grocery shopping by providing an intuitive platform where u
 4. Start the backend server:  
    ```bash  
    npm start  
-   ```  
-5. (Frontend instructions will follow upon completion of backend development.)  
+   ```    
 
 ## Usage  
 - Backend runs on `http://localhost:4000` by default.  
